@@ -2,6 +2,7 @@ package br.com.wepdev.loucademia.domain.aluno;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Year;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -9,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import br.com.wepdev.loucademia.application.utils.StringUtils;
 
 @Entity
 @Table(name = "ALUNO")
@@ -56,6 +59,20 @@ public class Aluno implements Serializable{
 	
 	
 
+	public void gerarMatricula(String maxMatricula) {
+		Year ano = Year.now(); // Pegando o ano atual
+		
+		if(maxMatricula == null) {
+		   maxMatricula = ano + StringUtils.colocaZerosAEsquerda(0, 4); // Para o primeiro numero de matricula sera o ano atual mais 0000 EXEMPLO = 20210000
+		}
+		
+		int sequencial = Integer.parseInt(maxMatricula.substring(4)); // O indice começa no 0, então o 4 e o quinto elemento, ou seja pulamos os 4 primeiros, transformando a String em um numero inteiro
+		sequencial++; // SE O NUMERO DE MATRICULA JA EXISTIR E SOMADO + 1 
+		
+		this.matricula = ano + StringUtils.colocaZerosAEsquerda(sequencial, 4); // RESULTADO FINAL É = 20210001
+	}
+	
+	
 	public String getMatricula() {
 		return matricula;
 	}
