@@ -26,6 +26,7 @@ public class AlunoRepository {
 	
 	
 	/*
+	 * Busca um aluno por matricula
 	 * Matricula e o ID do Aluno
 	 */
 	public Aluno findByMatricula(String matricula) {

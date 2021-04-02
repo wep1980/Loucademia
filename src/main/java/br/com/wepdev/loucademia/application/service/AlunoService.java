@@ -53,5 +53,26 @@ public class AlunoService {
 		alunoRepository.update(aluno);
 		
 	}
+	
+	
+	/**
+	 * Busca um aluno por matricula
+	 * @param matricula
+	 * @return
+	 */
+	public Aluno findByMatricula(String matricula) {
+		return alunoRepository.findByMatricula(matricula);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

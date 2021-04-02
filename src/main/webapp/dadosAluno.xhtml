@@ -8,37 +8,45 @@
 	  lang="pt-br">
 	  
 	 <ui:composition template="layout.xhtml">
+	 
+	   <f:metadata> <!-- Quando a tela for carregada o JSF extrai a matricula que foi passada como parametro e copia para dentro do alunoBean.matricula, em seguida executa o metodo carregar que esta dentro do action -->
+		     <f:viewParam name="matricula" value="#{alunoBean.matricula}" /> <!-- Atribui parametros que foram passados para dentro do Bean -->
+		     <f:viewAction action="#{alunoBean.carregar}"/>
+	   </f:metadata>
+	   
 	    <ui:define name="conteudo">
 	    
-			  <h1>Novo aluno</h1>
+			  <h1>#{alunoBean.titulo}</h1>
 			  
-			  <div id="infoMessage">
-			    (Mensagem de sistema de erro ou sucesso)
-			  </div>
+			  <h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}"> <!-- So aparece na tela se for verdadeira , facesContext -> objeto interno do JSF que acessa o contexto da requisição -->
+				  <div id="infoMessage">
+				    <h:messages /> <!-- Renderiza as mensagens -->
+				  </div>
+			  </h:panelGroup>
 			  
 			  <br/>
 			  
 			  <form jsf:id="form">
-			  
-			   <fieldset>
-			     <legend>Dados pessoais</legend>
-			   
-			      <label for="nome">Nome</label> <br/> 
-			      <input type="text" jsf:value="#{alunoBean.aluno.nome}" id="nome" /> <br/>
-			      
-			      <label for="sexo">Sexo</label> <br/> 
-			      <select jsf:value="#{alunoBean.aluno.sexo}" id="sexo" size="0">
-			         <f:selectItems value="#{dataBean.sexos}" />
-			      </select> <br/>
-			      
-			      <label for="rg">RG</label> <br/> 
-			      <input type="text" jsf:value="#{alunoBean.aluno.rg}" id="rg" /> <br/>
-			      
-			      <label for="dataDeNascimento">Data de Nascimento</label> <br/> 
-			      <input type="date" jsf:value="#{alunoBean.aluno.dataNascimento}" id="dataDeNascimento">
-			         <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" /> <!-- Conversor de Data -->
-			      </input> <br/>
-			   </fieldset>
+			     <input type="hidden" jsf:value="#{alunoBean.aluno.matricula}" />
+				   <fieldset>
+				     <legend>Dados pessoais</legend>
+				   
+				      <label for="nome">Nome</label> <br/> 
+				      <input type="text" jsf:value="#{alunoBean.aluno.nome}" id="nome" /> <br/>
+				      
+				      <label for="sexo">Sexo</label> <br/> 
+				      <select jsf:value="#{alunoBean.aluno.sexo}" id="sexo" size="0">
+				         <f:selectItems value="#{dataBean.sexos}" />
+				      </select> <br/>
+				      
+				      <label for="rg">RG</label> <br/> 
+				      <input type="text" jsf:value="#{alunoBean.aluno.rg}" id="rg" /> <br/>
+				      
+				      <label for="dataDeNascimento">Data de Nascimento</label> <br/> 
+				      <input type="date" jsf:value="#{alunoBean.aluno.dataNascimento}" id="dataDeNascimento">
+				         <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" /> <!-- Conversor de Data -->
+				      </input> <br/>
+				   </fieldset>
 			  
 			  <br/>
 			  
