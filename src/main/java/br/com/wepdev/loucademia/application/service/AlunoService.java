@@ -1,10 +1,13 @@
 package br.com.wepdev.loucademia.application.service;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import br.com.wepdev.loucademia.application.utils.StringUtils;
 import br.com.wepdev.loucademia.application.utils.Validation;
+import br.com.wepdev.loucademia.application.utils.ValidationException;
 import br.com.wepdev.loucademia.domain.aluno.Aluno;
 import br.com.wepdev.loucademia.domain.aluno.AlunoRepository;
 
@@ -65,7 +68,26 @@ public class AlunoService {
 	}
 	
 	
+	/**
+	 * Metodo que lista os alunos, utilizado na tela pesquisaDeAluno.xhtml
+	 * @param matricula
+	 * @param nome
+	 * @param rg
+	 * @param telefone
+	 * @return
+	 */
+	public List<Aluno> listAlunos(String matricula , String nome , Integer rg , Integer telefone){
+		if(StringUtils.isEmpty(matricula) && StringUtils.isEmpty(nome) && rg == null && telefone == null) {
+			throw new ValidationException("Pelo ao menos um critério de pesquisa deve ser fornecido");
+		}
+		return alunoRepository.listAlunos(matricula, nome, rg, telefone);
 	
+	}
+	
+	
+	public void delete(String matricula) {
+		alunoRepository.delete(matricula);
+	}
 	
 	
 	

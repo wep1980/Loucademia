@@ -46,5 +46,19 @@ public class DataBean implements Serializable{
 	public List<Estado> getEstados(){
 		return dataService.listEstados();
 	}
+	
+	
+	/**
+	 * Metodo que formata o numero do telefone
+	 * @param ddd
+	 * @param numero
+	 * @return
+	 */
+	public String formataTelefone(Integer ddd , Integer numero ) {
+		if(ddd == null || numero == null) {
+			return "";
+		}
+		return "(" + ddd + ")" + numero;
+	}
 
 }

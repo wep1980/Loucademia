@@ -13,13 +13,13 @@ public class Telefone implements Serializable{
 	@Column(name = "CELULAR_DDD", nullable = false, length = 2)
 	private Integer dddCelular;
 	
-	@Column(name = "CELULAR_NUMERO", nullable = true, length = 9)
+	@Column(name = "CELULAR_NUMERO", nullable = false, length = 9)
 	private Integer numeroCelular;
 	
 	@Column(name = "FIXO_DDD", nullable = true, length = 2)
 	private Integer dddFixo;
 	
-	@Column(name = "FIXO_NUMERO", nullable = false, length = 9)
+	@Column(name = "FIXO_NUMERO", nullable = true, length = 9)
 	private Integer numeroFixo;
 	
 	

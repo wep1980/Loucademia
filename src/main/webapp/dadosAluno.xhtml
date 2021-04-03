@@ -32,7 +32,9 @@
 				     <legend>Dados pessoais</legend>
 				   
 				      <label for="nome">Nome</label> <br/> 
-				      <input type="text" jsf:value="#{alunoBean.aluno.nome}" id="nome" /> <br/>
+				      <input type="text" jsf:value="#{alunoBean.aluno.nome}" id="nome" maxlength="64" jsf:label="Nome" >
+				        <f:validateLength minimum="2" maximum="64" />
+				      </input> <br/>
 				      
 				      <label for="sexo">Sexo</label> <br/> 
 				      <select jsf:value="#{alunoBean.aluno.sexo}" id="sexo" size="0">
@@ -40,11 +42,15 @@
 				      </select> <br/>
 				      
 				      <label for="rg">RG</label> <br/> 
-				      <input type="text" jsf:value="#{alunoBean.aluno.rg}" id="rg" /> <br/>
+				      <input type="text" jsf:value="#{alunoBean.aluno.rg}" id="rg" maxlength="10" jsf:label="RG">
+				         <f:validateLongRange minimum="100000" maximum="9999999999" />
+				         <f:validateRequired />
+				      </input> <br/>
 				      
 				      <label for="dataDeNascimento">Data de Nascimento</label> <br/> 
-				      <input type="date" jsf:value="#{alunoBean.aluno.dataNascimento}" id="dataDeNascimento">
+				      <input type="date" jsf:value="#{alunoBean.aluno.dataNascimento}" id="dataDeNascimento" jsf:label="Data de nascimento">
 				         <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" /> <!-- Conversor de Data -->
+				         <f:validateRequired />
 				      </input> <br/>
 				   </fieldset>
 			  
@@ -65,24 +71,36 @@
 			    <legend>Endereço</legend>
 			 
 			     <label for="rua">Rua</label> <br/> 
-			     <input type="text" jsf:value="#{alunoBean.aluno.endereco.rua}" id="rua" /> <br/>
+			     <input type="text" jsf:value="#{alunoBean.aluno.endereco.rua}" id="rua" jsf:label="Rua" maxlength="128">
+			         <f:validateLength minimum="2" maximum="128" />
+			     </input> <br/>
 			     
 			     <label for="numero">Número</label> <br/> 
-			     <input type="text" jsf:value="#{alunoBean.aluno.endereco.numero}" id="numero" /> <br/>
+			     <input type="text" jsf:value="#{alunoBean.aluno.endereco.numero}" id="numero" jsf:label="Número" maxlength="6">
+			         <f:validateLongRange minimum="1" maximum="999999" />
+			     </input> <br/>
 			     
 			     <label for="complemento">Complemento</label> <br/> 
-			     <input type="text" jsf:value="#{alunoBean.aluno.endereco.complemento}" id="complemento" /> <br/>
+			     <input type="text" jsf:value="#{alunoBean.aluno.endereco.complemento}" id="complemento" jsf:label="Complemento" maxlength="32">
+			          <f:validateLength maximum="32" />
+			     </input> <br/>
 			     
 			     <label for="cidade">Cidade</label> <br/> 
-			     <input type="text" jsf:value="#{alunoBean.aluno.endereco.cidade}" id="cidade" /> <br/>
+			     <input type="text" jsf:value="#{alunoBean.aluno.endereco.cidade}" id="cidade" jsf:label="Cidade" maxlength="64">
+			         <f:validateLength minimum="2" maximum="64" />
+			     </input> <br/>
 			     
 			     <label for="estado">Estado</label> <br/>
-			     <select jsf:value="#{alunoBean.aluno.endereco.estado.sigla}" id="estado" size="0">
+			     <select jsf:value="#{alunoBean.aluno.endereco.estado.sigla}" id="estado" size="0" jsf:label="Estado">
+			       <f:selectItem itemLabel="Escolha..." itemValue=""/>
 			       <f:selectItems value="#{dataBean.estados}" var="e" itemLabel="#{e.nome}" itemValue="#{e.sigla}"/> <!-- var="e" -> Variavel criada para acessar os atributos do Estado *** itemLabel="#{e.nome}" -> Nome do estado que aparecera na tela *** itemValue="#{e.sigla}" -> Valor que sera armazenado no servidor -->
+			       <f:validateRequired />
 			     </select> <br/>
 			     
 			     <label for="cep">CEP</label> <br/> 
-			     <input type="text" jsf:value="#{alunoBean.aluno.endereco.cep}" id="cep" /> <br/>
+			     <input type="text" jsf:value="#{alunoBean.aluno.endereco.cep}" id="cep" jsf:label="CEP" maxlength="8">
+			        <f:validateLongRange minimum="10000000" maximum="99999999" />
+			     </input> <br/>
 			  </fieldset>
 			  
 			  <br/>
@@ -91,21 +109,36 @@
 			    <legend>Contato</legend>
 			    
 			    <label for="email">E-mail</label><br/>
-			    <input type="email" jsf:value="#{alunoBean.aluno.email}" id="email" /> <br/>
+			    <input type="email" jsf:value="#{alunoBean.aluno.email}" id="email" jsf:label="E-mail" maxlength="64">
+			       <f:validateLength maximum="64" />
+			       <f:validateRegex pattern=".+@.+" /> <!-- Validação por expressão regular -->
+			    </input> <br/>
 			    
 			    <label for="telefoneCelularDDD">Telefone Celular</label> <br/>
-			    <input type="tel" jsf:value="#{alunoBean.aluno.telefone.dddCelular}" id="telefoneCelularDDD" />&#160; <!-- &#160; -> Da uma espaço entre o DDD e o numero  -->
-			    <input type="tel" jsf:value="#{alunoBean.aluno.telefone.numeroCelular}" id="telefoneCelularNumero" /> <br/>
+			    <input type="tel" jsf:value="#{alunoBean.aluno.telefone.dddCelular}" id="telefoneCelularDDD" maxlength="2" jsf:label="DDD Celular">
+			       <f:validateLongRange minimum="10" maximum="99" />
+			       <f:validateRequired />
+			    </input>&#160; <!-- &#160; -> Da uma espaço entre o DDD e o numero  -->
+			    
+			    <input type="tel" jsf:value="#{alunoBean.aluno.telefone.numeroCelular}" id="telefoneCelularNumero" maxlength="9" jsf:label="Telefone Celular">
+			       <f:validateLongRange minimum="10000000" maximum="999999999" />
+			       <f:validateRequired />
+			    </input> <br/>
 			    
 			    <label for="telefoneFixoDDD">Telefone Fixo</label> <br/>
-			    <input type="tel" jsf:value="#{alunoBean.aluno.telefone.dddFixo}" id="telefoneFixoDDD" />&#160;
-			    <input type="tel" jsf:value="#{alunoBean.aluno.telefone.numeroFixo}" id="telefoneFixoNumero" />
+			    <input type="tel" jsf:value="#{alunoBean.aluno.telefone.dddFixo}" id="telefoneFixoDDD" maxlength="2" jsf:label="DDD Fixo">
+			       <f:validateLongRange minimum="10" maximum="99" />
+			    </input>&#160;
+			    
+			    <input type="tel" jsf:value="#{alunoBean.aluno.telefone.numeroFixo}" id="telefoneFixoNumero" maxlength="9" jsf:label="Telefone Fixo">
+			       <f:validateLongRange minimum="10000000" maximum="999999999" />
+			    </input>
 			    
 			  </fieldset>
 			  
 			  <br/>
 			  
-			  <input type="submit" value="Cadastrar" jsf:action="#{alunoBean.cadastrar}"/>
+			  <input type="submit" value="Salvar" jsf:action="#{alunoBean.cadastrar}"/>
 			  <input type="button" value="Relatório de acessos"/>
 			  
 			  </form>
