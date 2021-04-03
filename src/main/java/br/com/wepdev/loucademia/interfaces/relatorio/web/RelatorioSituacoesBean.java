@@ -2,9 +2,12 @@ package br.com.wepdev.loucademia.interfaces.relatorio.web;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.annotation.RequestParameterMap;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.wepdev.loucademia.application.service.AlunoService;
@@ -20,9 +23,29 @@ public class RelatorioSituacoesBean implements Serializable{
 	@EJB
 	private AlunoService alunoService;
 	
+	
+	@Inject
+	@RequestParameterMap // Pega os parametros que vem na requisição incluindo os que vem na URL , a chave do Map vai ser o nome do parametro e o valor vai ser o valor do parametro
+	private Map<String , String> requisicaoParametrosMap; // Variavel que 
+	
 	private Situacao situacao;
 	
 	private List<Aluno> alunos;
+	
+	
+	
+	/**
+	 * Metodo que limpa a tela caso exista dados nela
+	 */
+	public void checarELimparTela() {
+		String limpar = requisicaoParametrosMap.get("limpar");
+		
+		// Boolean.valueOf(limpar) -> Transforma uma String em Boolean , ou seja a condição e se for verdadeiro
+		if(limpar != null && Boolean.valueOf(limpar)) { // Se for for verdadeiro e limpar diferente de nulo	
+			situacao = null;
+			alunos = null;
+		}
+	}
 	
 	
 	

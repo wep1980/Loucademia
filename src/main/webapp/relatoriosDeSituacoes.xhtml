@@ -8,17 +8,14 @@
 	  lang="pt-br">
 	  
 	 <ui:composition template="layout.xhtml">
+	 
+	      <ui:param name="titulo" value="Relatórios de situações" /> <!-- Ao acessa essa pagina a pagina de layout exibe o nome dessa tela -->
+	      
 	      <ui:define name="conteudo">
-		  
-			  <h1>Relatórios de situação</h1>
-			  
-			  <h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}"> <!-- So aparece na tela se for verdadeira , facesContext -> objeto interno do JSF que acessa o contexto da requisição -->
-					  <div id="infoMessage">
-					    <h:messages /> <!-- Renderiza as mensagens -->
-					  </div>
-			  </h:panelGroup>
-			  
-			  <br />
+	      
+	      <f:metadata> 
+		     <f:viewAction action="#{relatorioSituacoesBean.checarELimparTela}" /> 
+	     </f:metadata>
 			  
 				  <form jsf:id="form">
 				  	  <fieldset>

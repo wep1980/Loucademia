@@ -8,17 +8,14 @@
 	  lang="pt-br">
 	  
 	 <ui:composition template="layout.xhtml">
+	 
+	   <ui:param name="titulo" value="Pesquisa de aluno" /> <!-- Ao acessa essa pagina a pagina de layout exibe o nome dessa tela -->
+	   
 	    <ui:define name="conteudo">
-		  
-		  <h1>Pesquisa de aluno</h1>
-		  
-		    <h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}"> <!-- So aparece na tela se for verdadeira , facesContext -> objeto interno do JSF que acessa o contexto da requisição -->
-				  <div id="infoMessage">
-				    <h:messages /> <!-- Renderiza as mensagens -->
-				  </div>
-			  </h:panelGroup>
-		  
-		   <br />
+	    
+	     <f:metadata> <!--  -->
+		     <f:viewAction action="#{pesquisaAlunoBean.checarELimparTela}" /> <!-- -->
+	     </f:metadata>
 		  
 		  <form jsf:id="form">
 		  
@@ -26,16 +23,16 @@
 			      <legend>Parâmetros da pesquisa</legend>
 				      
 				      <label for="id">Matricula</label>  <br /> 
-				      <input type="text" jsf:value="#{pesquisaAlunoBean.matricula}" id="id" />  <br />
+				      <input type="text" jsf:value="#{pesquisaAlunoBean.matricula}" id="id" jsf:label="Matrícula" />  <br />
 				      
 				      <label for="nome">Nome</label>  <br /> 
-				      <input type="text" jsf:value="#{pesquisaAlunoBean.nome}" id="nome" />  <br />
+				      <input type="text" jsf:value="#{pesquisaAlunoBean.nome}" id="nome" jsf:label="Nome" />  <br />
 				      
 				      <label for="rg">RG</label>  <br /> 
-				      <input type="text" jsf:value="#{pesquisaAlunoBean.rg}" id="rg" />  <br />
+				      <input type="text" jsf:value="#{pesquisaAlunoBean.rg}" id="rg" jsf:label="RG" />  <br />
 			      
 				    <label for="telefoneNumero">Telefone</label>  <br />
-				    <input type="tel" jsf:value="#{pesquisaAlunoBean.telefone}" id="telefoneNumero" />  <br />
+				    <input type="tel" jsf:value="#{pesquisaAlunoBean.telefone}" id="telefoneNumero" jsf:label="Telefone" />  <br />
 			    </fieldset>
 			    
 			     <br />

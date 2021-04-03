@@ -8,27 +8,21 @@
 	  lang="pt-br">
 	  
 	 <ui:composition template="layout.xhtml">
+	 
+	   <ui:param name="titulo" value="Controle de acesso" /> <!-- Ao acessa essa pagina a pagina de layout exibe o nome dessa tela -->
+	   
 	    <ui:define name="conteudo">
-			  	  <h1>Controle de Acesso</h1>
-			  
-			  <h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}"> <!-- So aparece na tela se for verdadeira , facesContext -> objeto interno do JSF que acessa o contexto da requisição -->
-				  <div id="infoMessage">
-				    <h:messages /> <!-- Renderiza as mensagens -->
-				  </div>
-			  </h:panelGroup>
-			  
-			  <br />
-			  
+	    
 			  <form jsf:id="form">
 			  
 			    <fieldset>
 			      <legend>Parâmetros de Acesso</legend>
 				      
 				      <label for="id">Matricula</label> <br /> 
-				      <input type="text" jsf:value="#{controleAcessoBean.matricula}" id="id" /> <br />
+				      <input type="text" jsf:value="#{controleAcessoBean.matricula}" id="id" jsf:label="Matrícula" /> <br />
 				      
 				      <label for="rg">RG</label> <br /> 
-				      <input type="text" jsf:value="#{controleAcessoBean.rg}" id="rg" /> <br />
+				      <input type="text" jsf:value="#{controleAcessoBean.rg}" id="rg" jsf:label="RG"/> <br />
 			
 			    </fieldset>
 			    

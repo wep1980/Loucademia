@@ -9,7 +9,7 @@
 	<head jsf:id="head">
 	   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	   <link rel="stylesheet" type="text/css" href="resources/css/loucademia_estilo.css"/>
-	   <title>Novo aluno</title>
+	   <title>Loucademia</title>
 	</head>
       <body>
          
@@ -18,13 +18,23 @@
 		     <nav>
 		       <div>
 		         <a jsf:outcome="dadosAluno">Novo aluno</a><br/>
-		         <a jsf:outcome="pesquisaDeAluno">Pesquisa de aluno</a> <br/>
+		         <a jsf:outcome="pesquisaDeAluno?limpar=true">Pesquisa de aluno</a> <br/> <!-- Passando o parametro limpar na URL como true, ou seja fazer a limpeza da tela -->
 		         <a jsf:outcome="controleDeAcesso">Controle de acesso</a> <br/>
 		         <a jsf:outcome="relatoriosDeEntradaSaida">Relatórios de Entradas e Saídas</a> <br/>
-		         <a jsf:outcome="relatoriosDeSituacoes">Relatórios de situações</a> <br/>
+		         <a jsf:outcome="relatoriosDeSituacoes?limpar=true">Relatórios de situações</a> <br/> <!-- Passando o parametro limpar na URL como true, ou seja fazer a limpeza da tela -->
 		       </div>
 		     </nav>
 		  </header>
+		  
+		          <h1>#{titulo}</h1>
+			  
+				  <h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}"> <!-- So aparece na tela se for verdadeira , facesContext -> objeto interno do JSF que acessa o contexto da requisição -->
+					  <div id="infoMessage">
+					    <h:messages /> <!-- Renderiza as mensagens -->
+					  </div>
+				  </h:panelGroup>
+				  
+				  <br />
 		  
 		  <ui:insert name="conteudo" />
 	

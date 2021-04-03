@@ -8,6 +8,9 @@
 	  lang="pt-br">
 	  
 	 <ui:composition template="layout.xhtml">
+	   
+	   <ui:param name="titulo" value="Relatórios de entradas e saídas" /> <!-- Ao acessa essa pagina a pagina de layout exibe o nome dessa tela -->
+	   
 	      <ui:define name="conteudo">
 	      
 	      <f:metadata> <!-- Quando a tela for carregada o JSF extrai a matricula que foi passada como parametro e copia para dentro do relatorioEntradaSaidaBean.matricula, 
@@ -16,16 +19,6 @@
 		     <f:viewParam name="matricula" value="#{relatorioEntradaSaidaBean.matricula}" /> <!-- Atribui parametros que foram passados para dentro do Bean -->
 		     <f:viewAction action="#{relatorioEntradaSaidaBean.carregarAluno}"/>
 	      </f:metadata>
-	      
-		  	 <h1>Relatório de Entradas e Saídas</h1>
-		  
-			 <h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}"> <!-- So aparece na tela se for verdadeira , facesContext -> objeto interno do JSF que acessa o contexto da requisição -->
-					  <div id="infoMessage">
-					    <h:messages /> <!-- Renderiza as mensagens -->
-					  </div>
-			 </h:panelGroup>
-		  
-		  <br />
 		  
 		  <form jsf:id="form">
 		  
@@ -33,10 +26,9 @@
 			      <legend>Parâmetros de Entradas e Saídas</legend>
 				      
 				      <label for="id">Matrícula</label> <br /> 
-				      <input type="text" jsf:value="#{relatorioEntradaSaidaBean.matricula}" id="id" /> <br />
+				      <input type="text" jsf:value="#{relatorioEntradaSaidaBean.matricula}" id="id" jsf:label="Matrícula"/> <br />
 				      
 				      <label for="dataInicial">Data Inicial</label> <br /> 
-				      
 				      <!-- O componente de Date dos navegadores possui um formato de ano-mes-dia , essa data precisa ser convertida para ser utilizada no Bean-->
 				      <input type="date" jsf:value="#{relatorioEntradaSaidaBean.dataInicial}" id="dataInicial" >
 				         <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" /> 
