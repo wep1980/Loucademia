@@ -37,6 +37,39 @@ public class Acesso implements Serializable{
 	private LocalDateTime saida;
 	
 	
+	
+	/*
+	 * Metodo que verifica se a entrada e saida estão preenchidas
+	 */
+	public boolean isEntradaSaidaPreenchidas() {
+		if(entrada != null && saida != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	/*
+	 * Metodo que coloca a data e hora de entrada ou saida do aluno
+	 */
+	public TipoAcesso registrarAcesso() {
+		LocalDateTime dataEHoraAtual = LocalDateTime.now(); 
+		TipoAcesso tipoAcesso;
+		
+		if(entrada == null) {
+			entrada = dataEHoraAtual;
+			tipoAcesso = TipoAcesso.Entrada;
+			
+		} else if(saida == null) {
+			saida = dataEHoraAtual;
+			tipoAcesso = TipoAcesso.Saida;
+			
+		} else {
+			tipoAcesso = null;
+		}
+		return tipoAcesso;
+	}
+	
 
 	public Integer getId() {
 		return id;

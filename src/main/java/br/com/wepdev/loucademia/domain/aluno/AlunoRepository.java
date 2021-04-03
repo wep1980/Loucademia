@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -38,13 +39,31 @@ public class AlunoRepository {
 	}
 	
 	
+	/**
+	 * Busca um aluno por RG , JPQL
+	 * @param rg
+	 * @return
+	 */
+	public Aluno findByRG(Integer rg) {
+		
+		try {
+			return entityManager.createQuery("SELECT a FROM Aluno a WHERE a.rg = :rg" , Aluno.class)
+					.setParameter("rg", rg)
+					.getSingleResult();
+			
+		} catch (NoResultException e) { // Evita a excessão da JPA quando a busca for feita por um RG de aluno que não exista
+			return null; //Evita a excessão de uma matricula que não exista
+		}
+	}
+	
+	
 	/*
 	 * Para excluir um objeto primeiro ele precisa ser carregado
 	 */
 	public void delete(String matricula) {
 		Aluno aluno = findByMatricula(matricula); // CARREGA O ALUNO
 		
-		if(aluno != null) { // SE O ALUNO EXISTIR E REMOVIDO
+		if(aluno != null) { // SE O ALUNO EXISTIR É REMOVIDO
 			entityManager.remove(aluno);
 		}
 	}
