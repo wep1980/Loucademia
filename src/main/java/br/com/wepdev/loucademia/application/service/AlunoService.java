@@ -1,5 +1,6 @@
 package br.com.wepdev.loucademia.application.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -8,6 +9,7 @@ import javax.ejb.Stateless;
 import br.com.wepdev.loucademia.application.utils.StringUtils;
 import br.com.wepdev.loucademia.application.utils.Validation;
 import br.com.wepdev.loucademia.application.utils.ValidationException;
+import br.com.wepdev.loucademia.domain.acesso.Acesso;
 import br.com.wepdev.loucademia.domain.aluno.Aluno;
 import br.com.wepdev.loucademia.domain.aluno.Aluno.Situacao;
 import br.com.wepdev.loucademia.domain.aluno.AlunoRepository;
@@ -101,7 +103,12 @@ public class AlunoService {
 	
 	
 	
-	
+	public List<Acesso> listAcessosAlunos(String matricula , LocalDate dataInicial , LocalDate dataFinal){
+		if(StringUtils.isEmpty(matricula) && dataInicial == null && dataFinal == null) {
+			throw new ValidationException("Pelo ao menos um critério de pesquisa deve ser fornecido");
+		}
+		return alunoRepository.listAcessosAlunos(matricula, dataInicial, dataFinal);
+	}
 	
 
 }

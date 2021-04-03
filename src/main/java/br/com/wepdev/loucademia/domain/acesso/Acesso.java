@@ -1,6 +1,7 @@
 package br.com.wepdev.loucademia.domain.acesso;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -69,6 +70,22 @@ public class Acesso implements Serializable{
 		}
 		return tipoAcesso;
 	}
+	
+	
+	/*
+	 * Metodo que calcula o tempo que o aluno ficou na academia
+	 * Metodo ja retorna no formato que e exibido na tela
+	 */
+	public String calcularDuracao() {
+		
+		if(entrada == null || saida == null) {
+			return null;
+		}
+		
+		Duration d = Duration.between(entrada, saida);
+		return String.format("%02d:%02d", d.toHoursPart() , d.toMinutesPart()); // toHoursPart() e toHoursPart() -> so a partir do java 9 em diante
+	}
+	
 	
 
 	public Integer getId() {
