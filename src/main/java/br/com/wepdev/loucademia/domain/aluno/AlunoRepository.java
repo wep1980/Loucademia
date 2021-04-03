@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import br.com.wepdev.loucademia.application.utils.StringUtils;
+import br.com.wepdev.loucademia.domain.aluno.Aluno.Situacao;
 
 @Stateless
 public class AlunoRepository {
@@ -128,7 +129,13 @@ public class AlunoRepository {
 	
 	
 	
-	
+	public List<Aluno> listSituacoesAlunos(Situacao situacao){
+		
+		// Retorna uma lista de alunos de acordo com a situcao selecionada por ordem alfabetica de nome crescente
+		return entityManager.createQuery("SELECT a FROM Aluno a WHERE a.situacao = :situacao ORDER BY a.nome" , Aluno.class)
+				.setParameter("situacao", situacao)
+				.getResultList();
+	}
 	
 	
 	

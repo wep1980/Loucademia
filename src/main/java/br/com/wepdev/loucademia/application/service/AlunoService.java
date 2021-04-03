@@ -9,6 +9,7 @@ import br.com.wepdev.loucademia.application.utils.StringUtils;
 import br.com.wepdev.loucademia.application.utils.Validation;
 import br.com.wepdev.loucademia.application.utils.ValidationException;
 import br.com.wepdev.loucademia.domain.aluno.Aluno;
+import br.com.wepdev.loucademia.domain.aluno.Aluno.Situacao;
 import br.com.wepdev.loucademia.domain.aluno.AlunoRepository;
 
 @Stateless
@@ -91,6 +92,12 @@ public class AlunoService {
 	
 	
 	
+	
+	public List<Aluno> listSituacoesAlunos(Situacao situacao){
+		
+		Validation.assertNotEmpty(situacao); // Verifica se a situação não esta nula
+		return alunoRepository.listSituacoesAlunos(situacao);
+	}
 	
 	
 	
